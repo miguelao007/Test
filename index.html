@@ -373,7 +373,7 @@
 
                 <div class="tab-content" id="extra-tab">
                     <label class="checkbox-label">
-                        <input type="checkbox"> +120FPS
+                        <input type="checkbox" checked> +120FPS
                     </label>
                     <label class="checkbox-label">
                         <input type="checkbox" checked> Aumentar contraste
@@ -471,7 +471,7 @@
                 "Injetando Auxílio Recoil...",
                 "Ativando FOV e Puxada...",
                 "Conectando ao Servidor...",
-                "Injeção Concluída! Abrindo Free Fire..."
+                "Injeção Concluída! Preparando..." // Última mensagem alterada
             ];
 
             let step = 0;
@@ -484,19 +484,19 @@
                 } else {
                     clearInterval(interval);
                     
-                    // TENTATIVA DE DEEP LINK (para abrir o aplicativo Free Fire)
+                    // TENTATIVA DE DEEP LINK IMEDIATA (Tempo de espera de 1s)
                     setTimeout(() => {
-                        loadingText.textContent = "Tentando abrir o Free Fire...";
+                        loadingText.textContent = "Abrindo Free Fire...";
 
                         // Tenta abrir o Free Fire usando o esquema de URL (Android/iOS)
                         window.location.href = "freefire://"; 
                         
-                        // Finaliza a simulação
+                        // Mensagem final, que só será vista se o link não funcionar.
                         setTimeout(() => {
                             loadingText.textContent = "O auxílio está ativo!";
                         }, 2000); 
                         
-                    }, 2000);
+                    }, 1000); // Reduzido para 1 segundo para acelerar a transição
                 }
             }, 1500);
         }
