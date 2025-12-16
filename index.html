@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARABAO7XIS AUXILIO</title>
+    
+    <style>
+        :root {
+            --main-color: #00FFFF; /* Azul Elétrico - cor principal */
+            --main-color-dark: #00BFFF; /* Azul Escuro/Céu */
+            --bg-color: #1a1a1a; /* Fundo preto escuro */
+            --panel-bg: #222; /* Fundo do painel */
+            --border-color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; 
+        }
+
+        /* Simulação do Fundo (Os Pontos e Linhas) */
+        .background-net {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #001020 0%, #000 100%);
+            opacity: 0.9;
+            z-index: -1;
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* --- ESTILO DE LOGIN --- */
+        .login-container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* Sombra azul neon */
+            background: rgba(34, 34, 34, 0.9);
+        }
+
+        .logo-text {
+            color: var(--main-color);
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-shadow: 0 0 5px var(--main-color), 0 0 10px var(--main-color-dark);
+        }
+
+        .login-box input {
+            padding: 10px;
+            border: 1px solid var(--main-color-dark);
+            background: #000;
+            color: white;
+            margin-bottom: 10px;
+            width: 250px;
+            border-radius: 5px;
+        }
+
+        .login-box button {
+            width: 250px;
+            padding: 10px;
+            background-color: var(--main-color-dark);
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .login-box button:hover {
+            background-color: var(--main-color);
+        }
+
+        .warning-text {
+            color: red;
+            margin-top: 15px;
+            font-size: 0.8em;
+        }
+
+        /* --- ESTILO DO PAINEL PRINCIPAL --- */
+        .panel-container {
+            background: var(--panel-bg);
+            border: 2px solid var(--main-color-dark);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); /* Sombra azul neon */
+        }
+
+        header {
+            background-color: var(--main-color-dark);
+            color: var(--bg-color);
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .content-wrapper {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+            background: #111;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .nav-button {
+            background: transparent;
+            color: #fff;
+            border: none;
+            padding: 12px 10px;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.85em;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+        }
+
+        .nav-button.active {
+            background-color: var(--main-color-dark);
+            color: var(--bg-color);
+            font-weight: bold;
+            border-left: 3px solid var(--main-color);
+        }
+
+        .main-content {
+            width: 70%;
+            padding: 15px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Checkboxes e Sliders */
+        .checkbox-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background-color: #333;
+            border: 1px solid var(--main-color-dark);
+            margin-right: 8px;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"]:checked {
+            background-color: var(--main-color);
+            border-color: var(--main-color);
+        }
+
+        .checkbox-label input[type="checkbox"]:checked::after {
+            content: '✓';
+            color: #000;
+            font-size: 14px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+        }
+
+        .slider-group {
+            margin: 15px 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: #555;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--main-color);
+            cursor: pointer;
+        }
+
+        .slider:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 15px 0;
+        }
+
+        /* Botão Injetar */
+        .inject-button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--main-color-dark);
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .inject-button:hover {
+            background-color: var(--main-color);
+        }
+
+        /* INFO Tab */
+        #info-tab p {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #bbb;
+        }
+
+        /* Utilidade */
+        .hidden {
+            display: none !important;
+        }
+
+        /* --- ESTILO DA TELA DE CARREGAMENTO --- */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            color: var(--main-color);
+        }
+
+        #loadingText {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .loader {
+            border: 8px solid #333;
+            border-top: 8px solid var(--main-color);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    </head>
+<body>
+    <div class="background-net"></div>
+
+    <div class="login-container" id="loginScreen">
+        <h1 class="logo-text">CARABAO7XIS</h1>
+        <div class="login-box">
+            <input type="password" id="passwordInput" placeholder="DIGITE A SENHA" required>
+            <button onclick="checkLogin()">ENTRAR</button>
+        </div>
+        <p class="warning-text">Acesso Restrito</p>
+    </div>
+
+    <div class="panel-container hidden" id="mainPanel">
+        <header>
+            AUXILIO CARABAO7XIS
+        </header>
+
+        <div class="content-wrapper">
+            <nav class="sidebar">
+                <button class="nav-button active" data-target="aimbot-tab">AIMBOT</button>
+                <button class="nav-button" data-target="fps-tab">FPS</button>
+                <button class="nav-button" data-target="extra-tab">EXTRA</button>
+                <button class="nav-button" data-target="info-tab">INFO</button>
+            </nav>
+
+            <main class="main-content">
+                <div class="tab-content active" id="aimbot-tab">
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> Alto ajuste de alvo
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> Rastreamento suave
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> Aim trick
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> Aim lock
+                    </label>
+                    <hr>
+                    <label class="checkbox-label">
+                        <input type="checkbox" onchange="toggleFovSlider(this)"> ATIVAR FOV
+                    </label>
+                    <div class="slider-group">
+                        <label>FOV: <span id="fovValue">0</span>%</label>
+                        <input type="range" min="0" max="100" value="0" class="slider" id="fovSlider" disabled>
+                    </div>
+                    <div class="slider-group">
+                        <label>FORÇA DA PUXADA: <span id="pullValue">0</span>%</label>
+                        <input type="range" min="0" max="100" value="0" class="slider" id="pullSlider">
+                    </div>
+                    <button class="inject-button" onclick="injectPastas()">INJETAR PASTAS</button>
+                </div>
+
+                <div class="tab-content" id="fps-tab">
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> 20% no recoil
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> 90% auxilio recoil
+                    </label>
+                </div>
+
+                <div class="tab-content" id="extra-tab">
+                    <label class="checkbox-label">
+                        <input type="checkbox"> +120FPS
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> Aumentar contraste
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> Aumentar fluidez
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> Aumentar deslize
+                    </label>
+                </div>
+
+                <div class="tab-content" id="info-tab">
+                    <p>Criado por: carabao7xis</p>
+                    <p>@carabao7xis</p>
+                    <p>versão 2.1.0</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="loading-screen hidden" id="loadingScreen">
+        <p id="loadingText">Iniciando Injeção...</p>
+        <div class="loader"></div>
+    </div>
+    <script>
+        // --- LÓGICA DE LOGIN ---
+        // ⚠️ Mude 'carabao7xis2025' para a senha que você deseja usar!
+        const CORRECT_PASSWORD = "carabao7xis2025"; 
+
+        const loginScreen = document.getElementById('loginScreen');
+        const mainPanel = document.getElementById('mainPanel');
+        const passwordInput = document.getElementById('passwordInput');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const loadingText = document.getElementById('loadingText');
+
+        function checkLogin() {
+            if (passwordInput.value === CORRECT_PASSWORD) {
+                loginScreen.classList.add('hidden');
+                mainPanel.classList.remove('hidden');
+            } else {
+                alert("Senha incorreta! Tente novamente.");
+                passwordInput.value = '';
+            }
+        }
+
+        // --- LÓGICA DO PAINEL (Tabs e Sliders) ---
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Desativa todos os botões e conteúdos
+                document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Ativa o botão e o conteúdo selecionados
+                this.classList.add('active');
+                document.getElementById(this.dataset.target).classList.add('active');
+            });
+        });
+
+        // Lógica dos Sliders
+        const fovSlider = document.getElementById('fovSlider');
+        const fovValue = document.getElementById('fovValue');
+        const pullSlider = document.getElementById('pullSlider');
+        const pullValue = document.getElementById('pullValue');
+
+        fovSlider.addEventListener('input', () => {
+            fovValue.textContent = fovSlider.value;
+        });
+
+        pullSlider.addEventListener('input', () => {
+            pullValue.textContent = pullSlider.value;
+        });
+
+        // Habilita/Desabilita o slider FOV
+        function toggleFovSlider(checkbox) {
+            fovSlider.disabled = !checkbox.checked;
+            if (!checkbox.checked) {
+                fovSlider.value = 0;
+                fovValue.textContent = 0;
+            } else {
+                fovSlider.value = 100;
+                fovValue.textContent = 100;
+            }
+        }
+
+        // --- LÓGICA DO BOTÃO INJETAR PASTAS (Simulação com Deep Link) ---
+
+        function injectPastas() {
+            mainPanel.classList.add('hidden');
+            loadingScreen.classList.remove('hidden');
+
+            const statuses = [
+                "Iniciando Injeção...",
+                "Validando Configurações...",
+                "Injetando Auxílio Recoil...",
+                "Ativando FOV e Puxada...",
+                "Conectando ao Servidor...",
+                "Injeção Concluída! Abrindo Free Fire..."
+            ];
+
+            let step = 0;
+            
+            // Simula o processo de injeção
+            const interval = setInterval(() => {
+                if (step < statuses.length) {
+                    loadingText.textContent = statuses[step];
+                    step++;
+                } else {
+                    clearInterval(interval);
+                    
+                    // TENTATIVA DE DEEP LINK (para abrir o aplicativo Free Fire)
+                    setTimeout(() => {
+                        loadingText.textContent = "Tentando abrir o Free Fire...";
+
+                        // Tenta abrir o Free Fire usando o esquema de URL (Android/iOS)
+                        window.location.href = "freefire://"; 
+                        
+                        // Finaliza a simulação
+                        setTimeout(() => {
+                            loadingText.textContent = "O auxílio está ativo!";
+                        }, 2000); 
+                        
+                    }, 2000);
+                }
+            }, 1500);
+        }
+    </script>
+    </body>
+</html>
